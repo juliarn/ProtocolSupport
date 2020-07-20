@@ -3,16 +3,16 @@ import java.text.MessageFormat
 
 ext.newFile = {File parent, String... childs ->
 	for (String child : childs) {
-		parent = new File(parent, child);
+		parent = new File(parent, child)
 	}
-	return parent;
+	return parent
 }
 
 
 class UpdateLibrariesTask extends DefaultTask {
 	File directory
 	List<Map> libraries
-	Set<String> manualLibraries = new HashSet<>();
+	Set<String> manualLibraries = new HashSet<>()
 
 	@TaskAction
 	def update() {
@@ -34,13 +34,13 @@ class UpdateLibrariesTask extends DefaultTask {
 		})
 
 		directory.listFiles()
-		.findAll({
-			!librariesNames.contains(it.getName()) && !manualLibraries.contains(it.getName())
-		})
-		.each({
-			logger.lifecycle(MessageFormat.format("Deleting old library {0}", it.getName()))
-			it.delete()
-		})
+			.findAll({
+				!librariesNames.contains(it.getName()) && !manualLibraries.contains(it.getName())
+			})
+			.each({
+				logger.lifecycle(MessageFormat.format("Deleting old library {0}", it.getName()))
+				it.delete()
+			})
 	}
 
 }
